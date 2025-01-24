@@ -29,14 +29,12 @@ h3 {
   color: #555;
 }
 
-/* Список задач */
 .todo-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Карточка задачі */
 .todo-item {
   background: #f8f9fa;
   padding: 12px;
@@ -52,7 +50,6 @@ h3 {
   font-weight: bold;
 }
 
-/* Градієнтний текст */
 .gradient-text {
   background: linear-gradient(90deg, #ff8a00, #e52e71, #5a67d8, #667eea);
   background-size: 400% 400%;
@@ -61,19 +58,16 @@ h3 {
   animation: gradient-animation 3s infinite alternate;
 }
 
-/* Анімація градієнта */
 @keyframes gradient-animation {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
 
-/* Завершена задача */
 .completed {
   opacity: 0.6;
   text-decoration: line-through;
 }
 
-/* 🔥 ОНОВЛЕНІ СТИЛІ ДЛЯ ФОРМИ 🔥 */
 .todo-form {
   display: flex;
   margin-top: 15px;
