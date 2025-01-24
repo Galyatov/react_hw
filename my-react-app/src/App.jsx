@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 
 const emojis = [
     { id: 1, emoji: "😎", votes: 0 },
@@ -28,36 +29,25 @@ function App() {
     };
 
     return (
-        <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+        <div className="container">
             <h1>Vote for your favorite emoji!</h1>
             <div>
                 {emojiList.map((item) => (
-                    <div key={item.id} style={{ margin: "10px" }}>
-            <span
-                style={{ fontSize: "2rem", marginRight: "10px", cursor: "pointer" }}
-                onClick={() => handleVote(item.id)}
-            >
-              {item.emoji}
-            </span>
+                    <div key={item.id} className="emoji-container">
+                        <span className="emoji" onClick={() => handleVote(item.id)}>
+                            {item.emoji}
+                        </span>
                         <span>Votes: {item.votes}</span>
                     </div>
                 ))}
             </div>
-            <button
-                onClick={handleShowResults}
-                style={{
-                    marginTop: "20px",
-                    padding: "10px 20px",
-                    fontSize: "1rem",
-                    cursor: "pointer",
-                }}
-            >
+            <button onClick={handleShowResults} className="button">
                 Show Results
             </button>
             {winner && (
-                <div style={{ marginTop: "20px" }}>
+                <div className="winner">
                     <h2>Winner is:</h2>
-                    <span style={{ fontSize: "3rem" }}>{winner.emoji}</span>
+                    <span>{winner.emoji}</span>
                     <p>With {winner.votes} votes!</p>
                 </div>
             )}
