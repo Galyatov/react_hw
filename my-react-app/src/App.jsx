@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    const [todos, setTodos] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const addTodo = () => {
+        if (inputValue.trim() === "") return;
+        setTodos([...todos, { id: Date.now(), text: inputValue, completed: false }]);
+        setInputValue("");
+    };
+    const toggleTodo = (id) => {
+        setTodos(
+            todos.map(todo =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            )
+        );
+    };
+    const completedTodos = todos.filter(todo => todo.completed);
+    const uncompletedTodos = todos.filter(todo => !todo.completed);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div className="app-container">
+            <div className="todo-box">
+                <h2>✨ Мої задачі</h2>
+                <h3>⏳ У процесі</h3>
+                <ul className="todo-list">
+                    {uncompletedTodos.map(todo => (
+                        <li key={todo.id} onClick={() => toggleTodo(todo.id)} className="todo-item">
+                            <span className="gradient-text">{todo.text}</span>
+                        </li>
+                    ))}
+                </ul>
+                <h3>✅ Виконані</h3>
+                <ul className="todo-list">
+                    {completedTodos.map(todo => (
+                        <li key={todo.id} onClick={() => toggleTodo(todo.id)} className="todo-item completed">
+                            <span className="gradient-text">{todo.text}</span>
+                        </li>
+                    ))}
+                </ul>
+                <div className="todo-form">
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        placeholder="Введіть задачу..."
+                    />
+                    <button onClick={addTodo}>➕ Додати</button>
+                </div>
+            </div>
+        </div>
+    );
 }
-
-export default App
