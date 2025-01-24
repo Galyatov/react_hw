@@ -30,25 +30,25 @@ function App() {
 
     return (
         <div className="container">
-            <h1>Vote for your favorite emoji!</h1>
+            <h1>Голосуй за свій улюблений смайлик!</h1>
             <div>
                 {emojiList.map((item) => (
                     <div key={item.id} className="emoji-container">
                         <span className="emoji" onClick={() => handleVote(item.id)}>
                             {item.emoji}
                         </span>
-                        <span>Votes: {item.votes}</span>
+                        <span>Голосів: {item.votes}</span>
                     </div>
                 ))}
             </div>
             <button onClick={handleShowResults} className="button">
-                Show Results
+                Показати результати
             </button>
             {winner && (
                 <div className="winner">
-                    <h2>Winner is:</h2>
+                    <h2>Переможець:</h2>
                     <span>{winner.emoji}</span>
-                    <p>With {winner.votes} votes!</p>
+                    <p>З {winner.votes} голосами!</p>
                 </div>
             )}
         </div>
