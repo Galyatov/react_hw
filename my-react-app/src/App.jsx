@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
+import ContactsTable from "./ContactsTable";
+import ContactForm from "./ContactForm";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [contacts, setContacts] = useState([]);
+    const [showForm, setShowForm] = useState(false);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/users")
+            .then((response) => response.json())
+            .then((data) =>
+                setContacts(
+                    data.map((user) => ({
+                        id: user.id,
+                        firstName: user.name.split(" ")[0],
+                        lastName: user.name.split(" ")[1] || "",
+                        phone: user.phone,
+                    }))
+                )
+            );
+    }, []);
 
-export default App
+    const handleDelete = (id) => {
+        setContacts(contacts.filter((contact) => contact.id !== id));
+    };
+
+    const handleAddContact = (newContact) => {
+        setContacts([...contacts, { ...newContact, id: contacts.length + 1 }]);
+        setShowForm(false);
+    };
+
+    return (
+        <div className="container">
+            <h2>Список контактів</h2>
+            <ContactsTable contacts={contacts} onDelete={handleDelete} />
+            <button onClick={() => setShowForm(true)}>Додати контакт</button>
+            {showForm && (
+                <ContactForm
+                    onSave={handleAddContact}
+                    onCancel={() => setShowForm(false)}
+                />
+            )}
+        </div>
+    );
+};
+
+export default App;
