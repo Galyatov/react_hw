@@ -1,8 +1,13 @@
-# React + Vite
+Додаток складається з 2 частин: Список контактів та форма контакту
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+На сторінці Contacts є таблиця з 4-ма колонками (Ім'я, Прізвище, Телефон)
 
-Currently, two official plugins are available:
+У таблиці відобразити список контактів. У кожному рядку контакту є кнопка видалити, яка видаляє контакт
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Під таблицею кнопка/ посилання, яке показує форму додавання нового контакту
+
+В формі три поля та дві кнопки (Зберегти та Скасувати) Зберегти - зберігає контакт і зкриє форму, "Скасування" просто приховує форму.
+
+Дані взяти з API:
+
+https://jsonplaceholder.typicode.com/users
